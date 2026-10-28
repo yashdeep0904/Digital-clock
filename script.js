@@ -23,7 +23,6 @@ document.addEventListener('mouseleave', () => {
     }, 600);
 });
 
-
 // --- Clock Logic ---
 const timeDisplay = document.getElementById('hours-minutes');
 const secondsDisplay = document.getElementById('seconds-display');
@@ -37,7 +36,7 @@ function updateClock() {
     let minutes = now.getMinutes();
     let seconds = now.getSeconds();
     
-    // Smooth continuous rotation
+    // Smooth continuous rotation using milliseconds
     const milliseconds = now.getMilliseconds();
     const exactSeconds = seconds + (milliseconds / 1000);
 
@@ -70,6 +69,7 @@ function updateClock() {
 
 formatToggle.addEventListener('change', updateClock);
 
+// Use requestAnimationFrame for smooth 60fps rendering
 function animate() {
     updateClock();
     requestAnimationFrame(animate);
