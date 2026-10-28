@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Glassmorphism Clock</title>
+    <!-- Import Poppins font for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background element -->
+    <div class="background-gradient"></div>
+
+    <!-- Clock Container -->
+    <div class="clock-container glass">
+        <!-- Analog Second Hand Edge -->
+        <div class="analog-seconds-container">
+            <div class="second-hand-pivot" id="second-hand-pivot">
+                <div class="second-hand-dot"></div>
+            </div>
+        </div>
+        
+        <!-- Digital Display -->
+        <div class="digital-display">
+            <span id="hours-minutes">00:00</span>
+            <span id="seconds-display">00</span>
+            <span id="ampm">AM</span>
+        </div>
+        
+        <!-- Interactive Toggle Button -->
+        <div class="toggle-wrapper">
+            <span class="toggle-label">12H</span>
+            <label class="switch">
+                <input type="checkbox" id="format-toggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">24H</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
