@@ -14,6 +14,8 @@ body {
     background-color: #0f0c29;
     overflow: hidden;
     position: relative;
+    /* Establish 3D space */
+    perspective: 1000px;
 }
 
 /* Fluid Animated Gradient Background */
@@ -34,10 +36,19 @@ body {
     100% { transform: scale(1) translate(3%, -3%); }
 }
 
-/* Modern Glass Container */
+/* 3D Wrapper */
+.clock-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Modern Glass Container with 3D Preserves */
 .clock-container {
     position: relative;
-    z-index: 1;
     width: 420px;
     height: 420px;
     display: flex;
@@ -45,16 +56,20 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-}
-
-.glass {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), 
-                inset 0 0 20px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
+    /* Enable 3D rendering for children */
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
 }
+
+/* --- 3D Depth Layers --- */
+.layer-1 { transform: translateZ(30px); }
+.layer-2 { transform: translateZ(60px); }
+.layer-3 { transform: translateZ(90px); }
 
 /* Minimalist Analog Second Tracker */
 .analog-seconds-container {
@@ -76,10 +91,9 @@ body {
     transform-origin: center;
 }
 
-/* A glowing dot traveling along the outer edge */
 .second-hand-dot {
     position: absolute;
-    top: -4px; /* Sits exactly on the ring */
+    top: -4px;
     left: 50%;
     transform: translateX(-50%);
     width: 12px;
@@ -95,9 +109,9 @@ body {
     align-items: baseline;
     justify-content: center;
     color: #ffffff;
-    z-index: 2;
     margin-bottom: 25px;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Extra shadow to emphasize depth */
+    text-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
 }
 
 #hours-minutes {
@@ -129,11 +143,11 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    z-index: 2;
     background: rgba(0, 0, 0, 0.2);
     padding: 8px 16px;
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .toggle-label {
@@ -150,11 +164,7 @@ body {
     height: 24px;
 }
 
-.switch input { 
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+.switch input { opacity: 0; width: 0; height: 0; }
 
 .slider {
     position: absolute;
@@ -162,6 +172,7 @@ body {
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: rgba(255, 255, 255, 0.2);
     transition: .4s;
+    border-radius: 24px;
 }
 
 .slider:before {
@@ -174,20 +185,8 @@ body {
     background-color: white;
     transition: .4s;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-input:checked + .slider {
-    background-color: #ff0a54;
-}
-
-input:checked + .slider:before {
-    transform: translateX(20px);
-}
-
-.slider.round {
-    border-radius: 24px;
-}
-
-.slider.round:before {
     border-radius: 50%;
 }
+
+input:checked + .slider { background-color: #ff0a54; }
+input:checked + .slider:before { transform: translateX(20px); }
